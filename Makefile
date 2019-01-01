@@ -11,9 +11,9 @@ pipe:= |
 empty:=
 space:= $(empty) $(empty)
 
-export RISCV_TARGET ?= riscvOVPsim
+export RISCV_TARGET ?= simple_cpu
 export RISCV_DEVICE ?= rv32i
-export RISCV_PREFIX ?= riscv64-unknown-elf-
+export RISCV_PREFIX ?= riscv32-unknown-elf-
 
 RISCV_ISA_ALL = $(shell ls $(ROOTDIR)/riscv-target/$(RISCV_TARGET)/device)
 RISCV_ISA_OPT = $(subst $(space),$(pipe),$(RISCV_ISA_ALL))
@@ -21,7 +21,7 @@ RISCV_ISA_OPT = $(subst $(space),$(pipe),$(RISCV_ISA_ALL))
 
 ifeq ($(RISCV_ISA),)
     RISCV_ISA = rv32i
-    DEFAULT_TARGET=all_variant
+    DEFAULT_TARGET=variant
 else
     DEFAULT_TARGET=variant
 endif
@@ -68,4 +68,3 @@ help:
 	@echo "RISCV_DEVICE='rv32i|rv32im|...'"
 	@echo "RISCV_ISA=$(RISCV_ISA_OPT)"
 	@echo "make all_variant // all combinations"
-
